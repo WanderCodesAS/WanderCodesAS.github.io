@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "571a5d925e71344947e976ffd69513c6",
+    "revision": "08a2daabe453b46ba3abd6e6c34fce1d",
     "url": "/index.html"
   },
   {
-    "revision": "a407edf0968a2b7b75ca",
+    "revision": "8da6b3079919d2587b11",
     "url": "/static/css/2.941c46c6.chunk.css"
   },
   {
-    "revision": "d9cf80512e99686ab904",
-    "url": "/static/css/main.7c258893.chunk.css"
+    "revision": "8dcdcef7e8103a298957",
+    "url": "/static/css/main.dd19343d.chunk.css"
   },
   {
-    "revision": "a407edf0968a2b7b75ca",
-    "url": "/static/js/2.e8cbf06e.chunk.js"
+    "revision": "8da6b3079919d2587b11",
+    "url": "/static/js/2.4cab7831.chunk.js"
   },
   {
-    "revision": "991193dee658a35be8337b2e0829b1a8",
-    "url": "/static/js/2.e8cbf06e.chunk.js.LICENSE"
+    "revision": "c8c044787b924494bac844c01eb80ed1",
+    "url": "/static/js/2.4cab7831.chunk.js.LICENSE"
   },
   {
-    "revision": "d9cf80512e99686ab904",
-    "url": "/static/js/main.cb191fbc.chunk.js"
+    "revision": "8dcdcef7e8103a298957",
+    "url": "/static/js/main.0931d4b0.chunk.js"
   },
   {
     "revision": "c78a2b9289f815ad970e",
@@ -132,6 +132,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/maldives.67f1bef6.jpg"
   },
   {
+    "revision": "1fc2d46583cf67106413cbd92769f85b",
+    "url": "/static/media/man.1fc2d465.jpg"
+  },
+  {
     "revision": "e84a5d159d880c30acbaca92ab385730",
     "url": "/static/media/post-img1.e84a5d15.jpg"
   },
@@ -142,6 +146,14 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "e84a5d159d880c30acbaca92ab385730",
     "url": "/static/media/post-img3.e84a5d15.jpg"
+  },
+  {
+    "revision": "7235e96ab76583b8d30e51e52a57b4dd",
+    "url": "/static/media/profile.7235e96a.jpg"
+  },
+  {
+    "revision": "94de0520acb20dddd412634f5042c074",
+    "url": "/static/media/shap1.94de0520.png"
   },
   {
     "revision": "b7c9e1e479de3b53f1e4e30ebac2403a",
