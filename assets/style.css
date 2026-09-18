@@ -1,0 +1,170 @@
+@font-face {
+  font-family: 'DM Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('dm-mono-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'DM Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('dm-mono-500.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Familjen Grotesk'; /*variable wght 400-600*/
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('familjen-grotesk.woff2') format('woff2');
+}
+  :root {
+    --root-ground: #f3f4f1; --root-ink: #16242b; --root-muted: #3a4a51; --root-meta: #4d5c63;
+    --root-rule: #c9cfcb; --root-accent: #1f5f6b; --root-on-accent: #ffffff; --root-sil: #1d2b31;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --root-ground: #0f181c; --root-ink: #e9eeeb; --root-muted: #c3cdc9; --root-meta: #9eacaa;
+      --root-rule: #2c3b41; --root-accent: #7cc4cf; --root-on-accent: #0f181c; --root-sil: #04080a;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    --ground: var(--root-ground); --ink: var(--root-ink); --muted: var(--root-muted); --meta: var(--root-meta);
+    --rule: var(--root-rule); --accent: var(--root-accent); --on-accent: var(--root-on-accent);
+    margin: 0; background: var(--ground); color: var(--ink);
+    font-family: 'Familjen Grotesk', 'Helvetica Neue', Helvetica, sans-serif; font-size: 16px; line-height: 1.5;
+    overflow-x: hidden;
+  }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  .mono { font-family: 'DM Mono', Menlo, Consolas, monospace; font-size: 12px; }
+
+  /* Fixed background stage */
+  .stage { position: fixed; inset: 0; z-index: 0; overflow: hidden; }
+  .scene {
+    --ground: var(--root-ground); --ink: var(--root-ink);
+    --hue: var(--root-ground);
+    /* Flat fallbacks. A UA without color-mix() keeps these; the @supports block below
+       replaces them where the function is available. This MUST be gated on @supports
+       rather than written as a fallback declaration immediately before the color-mix
+       one: a declaration containing var() is a pending-substitution value and is valid
+       at parse time, so the cascade would discard the fallback and only discover the
+       invalidity at computed-value time — landing stroke on `none` and fill on black. */
+    --scene-bg: var(--ground);
+    --scene-ground: var(--rule);
+    --line: var(--ink);
+    --hot: var(--hue);
+    position: absolute; inset: 0; background: var(--scene-bg);
+    opacity: 0; transition: opacity .9s ease;
+  }
+  @supports (color: color-mix(in oklab, red 50%, blue)) {
+    .scene {
+      --scene-bg: color-mix(in oklab, var(--ground) 84%, var(--hue));
+      --scene-ground: color-mix(in oklab, var(--ground) 66%, var(--hue));
+      --line: color-mix(in oklab, var(--ink) 72%, var(--hue));
+      --hot: color-mix(in oklab, var(--ink) 25%, var(--hue));
+    }
+  }
+  .scene.is-active { opacity: 1; }
+  .scene[data-night] { --ground: #0b2329; --ink: #e6efee; --hot: var(--hue); }
+  .layer {
+    position: absolute; left: 0; right: 0; bottom: -70px; height: calc(62vh + 70px);
+    width: 100%; will-change: transform;
+  }
+  @media (min-aspect-ratio: 1/1) { .layer { height: calc(82vh + 70px); } }
+  .ln { fill: none; stroke: var(--line); stroke-width: 1.5; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
+  .soft { opacity: .4; }
+  .solid { fill: var(--scene-bg); }
+  .earth { fill: var(--scene-ground); stroke: none; }
+  .sil { fill: var(--root-sil); stroke: none; }
+  .hot { stroke: var(--hot); }
+  .hotfill { fill: var(--hot); stroke: none; }
+  .mixfill { fill: var(--scene-ground); }
+  .dash { stroke-dasharray: 5 5; }
+  .route { fill: none; stroke: var(--hot); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round;
+           stroke-dasharray: 1; stroke-dashoffset: calc(1 - var(--draw, 0)); }
+
+  /* Top bar */
+  .bar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 3; height: 48px; padding: 0 20px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--ground); /* opaque fallback — see .scene; upgraded under @supports */
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    color: var(--meta);
+  }
+  .bar a { color: inherit; text-decoration: none; display: flex; align-items: center; min-height: 44px; }
+  .year { font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 500; }
+  .progress { position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--rule); }
+  .progress i { display: block; height: 100%; background: var(--accent); transform-origin: 0 50%; transform: scaleX(0); }
+
+  /* Content */
+  main { position: relative; z-index: 1; }
+  .sheet {
+    max-width: 30rem; margin-left: max(0px, 8vw - 20px); padding: 24px;
+    background: var(--ground); /* opaque fallback — see .scene; upgraded under @supports */
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    border: 1px solid var(--rule); border-radius: 6px;
+  }
+  .hero { min-height: 100vh; min-height: 100svh; padding: 84px 20px 40px; display: flex; flex-direction: column; }
+  .hero .sheet { background: none; border: 0; padding: 0; -webkit-backdrop-filter: none; backdrop-filter: none;
+                 display: flex; flex-direction: column; flex: 1; gap: 28px; }
+  .hero h1 { margin: 0; font-weight: 500; font-size: clamp(2.35rem, 9.6vw, 3.6rem); line-height: 1.06; letter-spacing: -0.02em; text-wrap: balance; }
+  .hero p { margin: 14px 0 0; color: var(--muted); text-wrap: pretty; }
+  .toc { margin-top: auto; border-top: 1px solid var(--ink); display: flex; flex-direction: column; }
+  .toc a { display: flex; align-items: center; gap: 16px; min-height: 46px; border-bottom: 1px solid var(--rule);
+           color: var(--ink); text-decoration: none; }
+  .toc a span:first-child { width: 40px; color: var(--meta); }
+  .toc a:last-child { border-bottom-color: var(--ink); color: var(--accent); font-weight: 600; }
+  .toc a:last-child span:first-child { color: inherit; font-weight: 400; }
+  .btn { display: flex; align-items: center; justify-content: center; height: 52px; padding: 0 24px; border-radius: 6px;
+         background: var(--accent); color: var(--on-accent); font-weight: 600; text-decoration: none; }
+
+  /* Pointer feedback. Behind (hover: hover) so touch devices do not get sticky hover. */
+  @media (hover: hover) {
+    .btn:hover { background: var(--ink); }
+    .toc a:hover { background: var(--rule); }
+    .bar a:hover, .links a:hover { text-decoration: underline; }
+  }
+  .btn:active, .toc a:active { opacity: .85; }
+
+  .chapter { padding: 16vh 20px 78vh; }
+  .chapter:last-child { padding-bottom: 46vh; }
+  .meta { display: flex; justify-content: space-between; gap: 16px; margin: 0 0 18px; color: var(--meta); }
+  h2 { margin: 0; font-weight: 500; font-size: clamp(2rem, 8.4vw, 2.75rem); line-height: 1.06; letter-spacing: -0.02em; text-wrap: balance; }
+  .lede { margin: 12px 0 0; color: var(--muted); text-wrap: pretty; }
+  .facts { margin: 22px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--ink); }
+  .facts li { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; padding: 13px 0;
+              border-bottom: 1px solid var(--rule); color: var(--muted); font-size: 15px; }
+  .fig { flex: none; font-weight: 500; font-size: 2.1rem; line-height: 1; letter-spacing: -0.02em; color: var(--accent);
+         font-variant-numeric: tabular-nums; text-align: right; }
+  .facts li > span:last-child { text-align: right; }
+  .facts li.plain > span { text-align: left; color: var(--ink); }
+  .links { display: flex; flex-wrap: wrap; gap: 4px 22px; margin: 10px 0 -8px; }
+  .links-after-btn { margin-top: 14px; }
+  .links a { display: flex; align-items: center; min-height: 44px; font-weight: 600; font-size: 15px; }
+  .tools { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0 22px; padding: 0; list-style: none; }
+  .tools li { padding: 5px 10px; border: 1px solid var(--rule); border-radius: 4px; color: var(--muted); }
+
+  /* Every color-mix() upgrade lives here. See the note in .scene for why this is gated on
+     @supports and not written as a preceding fallback declaration. */
+  @supports (color: color-mix(in oklab, red 50%, blue)) {
+    .bar { background: color-mix(in oklab, var(--ground) 86%, transparent); }
+    .sheet { background: color-mix(in oklab, var(--ground) 90%, transparent); }
+    .mixfill { fill: color-mix(in oklab, var(--scene-bg) 50%, var(--scene-ground)); }
+    @media (hover: hover) {
+      .btn:hover { background: color-mix(in oklab, var(--accent) 88%, var(--ink)); }
+      .toc a:hover { background: color-mix(in oklab, var(--ground) 92%, var(--ink)); }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    /* .scene keeps its opacity cross-fade deliberately: the preference asks for motion to be
+       replaced by a fade, not for the fade to be replaced by a hard full-viewport colour cut.
+       The parallax translation and the count-ups — the actual motion — are disabled in app.js. */
+    .route { stroke-dashoffset: 0; }
+  }

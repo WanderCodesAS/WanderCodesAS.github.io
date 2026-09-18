@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
+  <!-- TG monogram, Familjen Grotesk wght 600, converted to outlines.
+       An SVG referenced from <link rel="icon"> renders in secure static mode and loads
+       no external resources, so an @font-face here would never fetch. Regenerate with
+       tools/build-favicon.py if the mark or the typeface changes. -->
+  <rect x="0" y="0" width="180" height="180" rx="28" fill="#1f5f6b"/>
+  <g fill="#ffffff">
+  <path transform="translate(34.8516 120.0) scale(0.08166667 -0.08166667)" d="M268 0V657.5H30V780H660V657.5H422V0Z"/>
+  <path transform="translate(84.1641 120.0) scale(0.08166667 -0.08166667)" d="M370.75 -14.25Q262.75 -14.25 187.375 36.75Q112 87.75 72.5 179.5Q33 271.25 33 392.25Q33 515 73.625 605.125Q114.25 695.25 194.125 744.75Q274 794.25 392 794.25Q492 794.25 560.5 759.75Q629 725.25 668.0 663.75Q707 602.25 717.75 520H570.25Q558.25 596 512.625 636.625Q467 677.25 389.25 677.25Q287 677.25 237.25 601.875Q187.5 526.5 187.5 391.75Q187.5 252.25 239.75 176.5Q292 100.75 393.5 100.75Q478.75 100.75 525.5 150.875Q572.25 201 577.25 287.5H348.5V400.75H719V0H605.75V91.5H581.75Q561.25 50.25 512.25 18.0Q463.25 -14.25 370.75 -14.25Z"/>
+  </g>
+</svg>
