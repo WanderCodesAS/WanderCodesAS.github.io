@@ -36,40 +36,70 @@
   <!-- 0: hero, plain ground -->
   <div class="scene is-active"></div>
 
-  <!-- 1: oil and gas structures -->
+  <!-- 1: oil and gas structures (silhouette: pipeline over water, refinery at dusk) -->
   <div class="scene" style="--hue: #d9a441;">
     <svg class="layer" data-depth="12" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMax slice">
-      <g class="ln soft">
-        <path d="M120 560 V480 Q190 440 260 480 V560 M960 560 V462 Q1040 420 1120 462 V560"/>
-        <path d="M120 480 H260 M960 462 H1120"/>
+      <defs>
+        <linearGradient id="dusk" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#d9a441" stop-opacity="0"/>
+          <stop offset="1" stop-color="#e8743b" stop-opacity=".5"/>
+        </linearGradient>
+      </defs>
+      <rect x="0" y="110" width="1200" height="410" fill="url(#dusk)"/>
+      <path class="ln hot soft" d="M340 168 L520 112 M596 150 L770 78 M120 210 L260 176"/>
+      <path class="sil" style="opacity: .38" d="M506 408 C496 396 480 398 470 404 C462 392 440 392 432 402 C420 394 400 398 396 408 C384 404 372 410 370 418 C384 416 392 422 400 420 C412 428 430 424 436 418 C450 428 470 424 478 416 C490 422 502 418 506 408 Z"/>
+      <g id="skyline" class="sil">
+        <path d="M0 520 V452 L60 446 L150 458 L240 450 L320 462 L356 472 V520 Z"/>
+        <path d="M80 452 V436 Q105 424 130 436 V452 Z M250 456 V442 Q272 432 294 442 V456 Z"/>
+        <rect x="200" y="398" width="5" height="60"/><rect x="212" y="410" width="5" height="50"/>
+        <rect x="320" y="474" width="290" height="46"/>
+        <path d="M376 520 V456 H380 V520 Z M396 520 V456 H400 V520 Z M370 453 H420 V457 H370 Z M386 456 V444 L420 454 V457 Z"/>
+        <path d="M420 520 V460 H424 V520 Z M438 520 V460 H442 V520 Z M414 457 H460 V461 H414 Z M428 460 V448 L460 458 V461 Z"/>
+        <rect x="452" y="456" width="84" height="64"/><rect x="470" y="446" width="30" height="12"/>
+        <rect x="469" y="429" width="5" height="40"/><rect x="478" y="429" width="5" height="40"/>
+        <rect x="503" y="406" width="6" height="60"/><rect x="512" y="429" width="5" height="40"/>
+        <path d="M546 520 L552 418 H556 L562 520 Z"/><rect x="551" y="410" width="6" height="9"/>
+        <path d="M600 520 V472 H640 V468 H668 V474 H720 V466 H742 V472 H800 V468 H840 V474 H900 V470 H960 V476 H1200 V520 Z"/>
       </g>
-      <g class="ln">
-        <rect class="solid" x="430" y="250" width="34" height="310" rx="17"/>
-        <rect class="solid" x="478" y="310" width="26" height="250" rx="13"/>
-        <path d="M424 330 H470 M424 410 H470 M424 490 H470 M472 380 H510 M472 460 H510"/>
-        <path d="M770 560 V170 M756 560 L770 450 L784 560 M762 505 H778"/>
-        <path class="hot" d="M770 170 c-12 -14 -6 -28 2 -40 c2 14 14 18 9 32 c-2 7 -7 10 -11 8 z"/>
+      <g fill="#ffd27a">
+        <rect x="458" y="462" width="3" height="3"/><rect x="470" y="469" width="3" height="3"/><rect x="486" y="461" width="3" height="3"/>
+        <rect x="498" y="470" width="3" height="3"/><rect x="520" y="464" width="3" height="3"/><rect x="530" y="471" width="3" height="3"/>
+        <rect x="384" y="466" width="3" height="3"/><rect x="430" y="468" width="3" height="3"/>
+        <rect x="660" y="471" width="3" height="3"/><rect x="730" y="469" width="3" height="3"/><rect x="812" y="471" width="3" height="3"/>
       </g>
     </svg>
     <svg class="layer" data-depth="32" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMax slice">
-      <defs><path id="bay" d="M0 560 V400 M0 400 H60 M0 440 H60 M0 480 H60 M0 480 L60 440"/></defs>
-      <g class="ln">
-        <use href="#bay" x="200"/><use href="#bay" x="260"/><use href="#bay" x="320"/><use href="#bay" x="380"/>
-        <use href="#bay" x="440"/><use href="#bay" x="500"/><use href="#bay" x="560"/><use href="#bay" x="620"/>
-        <use href="#bay" x="680"/><use href="#bay" x="740"/><use href="#bay" x="800"/><use href="#bay" x="860"/>
-        <use href="#bay" x="920"/>
-        <path d="M980 560 V400"/>
-        <path d="M160 392 H560 V370 H620 V392 H1020 M160 384 H1020 M160 432 H1020"/>
+      <defs>
+        <clipPath id="underwater"><rect x="0" y="480" width="1200" height="220"/></clipPath>
+        <linearGradient id="duskdown" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#e8743b" stop-opacity=".4"/>
+          <stop offset="1" stop-color="#e8743b" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <rect class="earth" x="0" y="480" width="1200" height="220"/>
+      <rect x="0" y="480" width="1200" height="120" fill="url(#duskdown)"/>
+      <g clip-path="url(#underwater)" style="opacity: .22"><use href="#skyline" transform="matrix(1 0 0 -1 0 960)"/></g>
+      <g fill="#ffd27a" style="opacity: .55">
+        <rect x="459" y="484" width="2" height="26"/><rect x="487" y="484" width="2" height="34"/><rect x="499" y="484" width="2" height="22"/>
+        <rect x="521" y="484" width="2" height="30"/><rect x="385" y="484" width="2" height="20"/><rect x="661" y="484" width="2" height="20"/>
+        <rect x="731" y="484" width="2" height="24"/>
       </g>
+      <path class="ln soft" d="M380 540 H470 M520 560 H640 M700 548 H790 M420 590 H560 M640 600 H760 M120 556 H260 M900 570 H1040"/>
     </svg>
     <svg class="layer" data-depth="60" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMax slice">
-      <rect class="earth" x="0" y="560" width="1200" height="140"/>
-      <g class="ln">
-        <path d="M0 560 H1200"/>
-        <path d="M572 528 V560 M648 528 V560 M610 544 V560"/>
-        <circle class="solid" cx="610" cy="486" r="58"/>
-        <path d="M552 486 Q610 508 668 486"/>
+      <g class="sil" style="opacity: .3">
+        <rect x="635" y="500" width="15" height="62"/><rect x="779" y="500" width="15" height="74"/><rect x="630" y="497" width="170" height="6"/>
       </g>
+      <g class="sil">
+        <path d="M540 478 L580 469 V478 Z"/>
+        <path d="M580 467 L1200 -13 V381 L580 477 Z"/>
+        <rect x="586" y="472" width="4" height="22"/><rect x="606" y="468" width="5" height="26"/>
+        <path d="M690 486 L698 456 H736 L744 486 Z"/>
+        <rect x="635" y="403" width="15" height="97"/><rect x="779" y="440" width="15" height="60"/>
+        <rect x="630" y="484" width="170" height="11"/>
+      </g>
+      <path d="M600 458 L1200 -4 V30 L600 464 Z" fill="#f0b45a" style="opacity: .4"/>
+      <path d="M700 374 Q716 416 700 459 M840 266 Q866 350 840 437 M1020 126 Q1060 268 1020 409" fill="none" stroke="#f0b45a" stroke-width="2" style="opacity: .35"/>
     </svg>
   </div>
 
