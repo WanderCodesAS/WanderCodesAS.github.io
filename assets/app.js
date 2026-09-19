@@ -4,11 +4,15 @@
 // no package.json left to record a browserslist, so the floor is recorded here.
 (function () {
   var sections = Array.from(document.querySelectorAll('[data-scene]'));
-  var allScenes = Array.from(document.querySelectorAll('.scene'));
-  // Index scenes by the data-scene value each section declares, not by DOM position.
-  // The attribute reads as the contract; honouring it means reordering or inserting a
-  // chapter can no longer silently desynchronise the two lists.
-  var scenes = sections.map(function (s) { return allScenes[Number(s.dataset.scene)]; });
+  // Index scenes by the name each section asks for, not by DOM position. The attribute is
+  // the contract; honouring it means reordering or inserting a chapter can no longer
+  // silently desynchronise the two lists. Names rather than indices because there are ten
+  // scenes now and four of them sit mid-document — a number nobody can verify by eye.
+  var byName = {};
+  Array.from(document.querySelectorAll('.scene')).forEach(function (sc) {
+    byName[sc.dataset.name] = sc;
+  });
+  var scenes = sections.map(function (s) { return byName[s.dataset.scene]; });
   var layers = scenes.map(function (sc) {
     return sc ? Array.from(sc.querySelectorAll('.layer')) : [];
   });
@@ -56,6 +60,9 @@
     if (active !== current) {
       current = active;
       scenes.forEach(function (sc, i) { if (sc) sc.classList.toggle('is-active', i === active); });
+      // Read from the section, not the scene: the chapter decides whether the page is at
+      // night, and .scene[data-night] only ever reached the artwork.
+      document.body.dataset.night = activeSection.hasAttribute('data-night') ? 'true' : 'false';
     }
     var max = document.documentElement.scrollHeight - vh;
     progressEl.style.transform = 'scaleX(' + (max > 0 ? clamp(window.scrollY / max, 0, 1) : 0) + ')';

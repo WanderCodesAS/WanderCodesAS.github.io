@@ -37,7 +37,15 @@
     --rule: var(--root-rule); --accent: var(--root-accent); --on-accent: var(--root-on-accent);
     margin: 0; background: var(--ground); color: var(--ink);
     font-family: 'Familjen Grotesk', 'Helvetica Neue', Helvetica, sans-serif; font-size: 16px; line-height: 1.5;
+    transition: background-color .9s ease, color .9s ease;
     overflow-x: hidden;
+  }
+  /* The RideAustin chapter darkens the whole page, not just the artwork behind it. Set from
+     app.js off the active section's data-night, and timed to the scene cross-fade so the
+     sheet, bar and figures travel with the background rather than after it. */
+  body[data-night="true"] {
+    --ground: #0b2329; --ink: #e6efee; --muted: #c4d4d3; --meta: #9db4b3;
+    --rule: #2a4a50; --accent: #f2b544; --on-accent: #0b2329;
   }
   a { color: var(--accent); text-underline-offset: 3px; }
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
@@ -81,6 +89,12 @@
   .solid { fill: var(--scene-bg); }
   .earth { fill: var(--scene-ground); stroke: none; }
   .sil { fill: var(--root-sil); stroke: none; }
+  .pale { fill: var(--scene-bg); stroke: none; /* upgraded under @supports — see .scene */ }
+  .glow { fill: #ffd27a; stroke: none; }
+  .lbl { font-family: 'DM Mono', Menlo, Consolas, monospace; font-size: 15px; fill: var(--line); text-anchor: middle; }
+  /* Driven by --draw, the same scroll progress the .route dash uses. */
+  .rise { transform: translateY(calc(var(--draw, 0) * -36px)); }
+  .train { transform: translateX(calc(var(--draw, 0) * 300px)); }
   .hot { stroke: var(--hot); }
   .hotfill { fill: var(--hot); stroke: none; }
   .mixfill { fill: var(--scene-ground); }
@@ -94,7 +108,7 @@
     display: flex; align-items: center; justify-content: space-between;
     background: var(--ground); /* opaque fallback — see .scene; upgraded under @supports */
     -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
-    color: var(--meta);
+    color: var(--meta); transition: background-color .9s ease, color .9s ease;
   }
   .bar a { color: inherit; text-decoration: none; display: flex; align-items: center; min-height: 44px; }
   .year { font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 500; }
@@ -108,6 +122,7 @@
     background: var(--ground); /* opaque fallback — see .scene; upgraded under @supports */
     -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
     border: 1px solid var(--rule); border-radius: 6px;
+    transition: background-color .9s ease, border-color .9s ease;
   }
   .hero { min-height: 100vh; min-height: 100svh; padding: 84px 20px 40px; display: flex; flex-direction: column; }
   .hero .sheet { background: none; border: 0; padding: 0; -webkit-backdrop-filter: none; backdrop-filter: none;
@@ -121,7 +136,8 @@
   .toc a:last-child { border-bottom-color: var(--ink); color: var(--accent); font-weight: 600; }
   .toc a:last-child span:first-child { color: inherit; font-weight: 400; }
   .btn { display: flex; align-items: center; justify-content: center; height: 52px; padding: 0 24px; border-radius: 6px;
-         background: var(--accent); color: var(--on-accent); font-weight: 600; text-decoration: none; }
+         background: var(--accent); color: var(--on-accent); font-weight: 600; text-decoration: none;
+         transition: background-color .9s ease, color .9s ease; }
 
   /* Pointer feedback. Behind (hover: hover) so touch devices do not get sticky hover. */
   @media (hover: hover) {
@@ -132,6 +148,7 @@
   .btn:active, .toc a:active { opacity: .85; }
 
   .chapter { padding: 16vh 20px 78vh; }
+  .chapter.part { padding-bottom: 66vh; }
   .chapter:last-child { padding-bottom: 46vh; }
   .meta { display: flex; justify-content: space-between; gap: 16px; margin: 0 0 18px; color: var(--meta); }
   h2 { margin: 0; font-weight: 500; font-size: clamp(2rem, 8.4vw, 2.75rem); line-height: 1.06; letter-spacing: -0.02em; text-wrap: balance; }
@@ -140,7 +157,7 @@
   .facts li { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; padding: 13px 0;
               border-bottom: 1px solid var(--rule); color: var(--muted); font-size: 15px; }
   .fig { flex: none; font-weight: 500; font-size: 2.1rem; line-height: 1; letter-spacing: -0.02em; color: var(--accent);
-         font-variant-numeric: tabular-nums; text-align: right; }
+         font-variant-numeric: tabular-nums; text-align: right; transition: color .9s ease; }
   .facts li > span:last-child { text-align: right; }
   .facts li.plain > span { text-align: left; color: var(--ink); }
   .links { display: flex; flex-wrap: wrap; gap: 4px 22px; margin: 10px 0 -8px; }
@@ -155,6 +172,7 @@
     .bar { background: color-mix(in oklab, var(--ground) 86%, transparent); }
     .sheet { background: color-mix(in oklab, var(--ground) 90%, transparent); }
     .mixfill { fill: color-mix(in oklab, var(--scene-bg) 50%, var(--scene-ground)); }
+    .pale { fill: color-mix(in oklab, var(--scene-bg) 45%, #ffffff); }
     @media (hover: hover) {
       .btn:hover { background: color-mix(in oklab, var(--accent) 88%, var(--ink)); }
       .toc a:hover { background: color-mix(in oklab, var(--ground) 92%, var(--ink)); }
@@ -163,8 +181,11 @@
 
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    /* .scene keeps its opacity cross-fade deliberately: the preference asks for motion to be
-       replaced by a fade, not for the fade to be replaced by a hard full-viewport colour cut.
-       The parallax translation and the count-ups — the actual motion — are disabled in app.js. */
+    /* .scene keeps its opacity cross-fade deliberately, and body[data-night] keeps its colour
+       transition for the same reason: the preference asks for motion to be replaced by a fade,
+       not for the fade to be replaced by a hard full-viewport colour cut. Only the things that
+       actually travel are stopped here — the drawn route, the two --draw transforms, and the
+       parallax and count-ups, which app.js disables. */
     .route { stroke-dashoffset: 0; }
+    .rise, .train { transform: none; }
   }
