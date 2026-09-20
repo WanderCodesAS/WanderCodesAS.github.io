@@ -33,11 +33,8 @@
 
 <div class="stage" aria-hidden="true">
 
-  <!-- hero: plain ground -->
-  <div data-name="hero" class="scene is-active"></div>
-
   <!-- structures: oil and gas (silhouette: pipeline over water, refinery at dusk) -->
-  <div data-name="structures" class="scene" style="--hue: #d9a441;">
+  <div data-name="structures" class="scene is-active" style="--hue: #d9a441;">
     <svg class="layer" data-depth="12" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMax slice">
       <defs>
         <linearGradient id="dusk" x1="0" y1="0" x2="0" y2="1">
@@ -430,28 +427,51 @@
 
 <header class="bar mono">
   <a href="#top">Ted Gonzalez</a>
+  <a class="mail" href="mailto:gonzalez.theodore2@gmail.com">Email me</a>
   <span class="year" id="year" aria-hidden="true">2011</span>
   <span class="progress"><i id="progress"></i></span>
 </header>
 
 <main id="top">
 
-  <section class="hero" data-scene="hero" data-label="2011">
-    <div class="sheet">
-      <div>
-        <h1>I build apps, backends and the platform under them.</h1>
-        <p>iOS, server-side and AWS engineer in Oslo. Staff Engineer at DNB, Norway's largest bank.</p>
-      </div>
-      <nav class="toc" aria-label="Chapters">
-        <a href="#structures"><span class="mono">2011</span><span>Steel before software</span></a>
-        <a href="#switch"><span class="mono">2014</span><span>The switch to iOS</span></a>
-        <a href="#dubai"><span class="mono">2015</span><span>Dubai</span></a>
-        <a href="#startups"><span class="mono">2016</span><span>RideAustin</span></a>
-        <a href="#dnb"><span class="mono">2018</span><span>Norway's largest bank</span></a>
-        <a href="#now"><span class="mono">Now</span><span>What I can build for you</span></a>
-      </nav>
-      <a class="btn" href="mailto:gonzalez.theodore2@gmail.com">Email me</a>
+  <section class="hero" data-scene="structures" data-label="2011">
+    <div class="hero-in">
+      <p class="hello">Hi, I'm Ted.</p>
+      <h1>I build apps, backends and the platform under them.</h1>
+      <p class="sub">iOS, server-side and AWS engineer in Oslo. Staff Engineer at DNB, Norway's largest bank.</p>
     </div>
+    <div class="dog" id="dog" aria-hidden="true">
+      <svg viewBox="-30 -80 250 170">
+        <g id="dogHop">
+          <g transform="translate(48 52)"><g id="legHL" class="far"><rect x="-5" y="-2" width="10" height="28" rx="5"/><ellipse cx="1.5" cy="27" rx="7" ry="4.5"/></g></g>
+          <g transform="translate(86 52)"><g id="legFL" class="far"><rect x="-5" y="-2" width="10" height="28" rx="5"/><ellipse cx="1.5" cy="27" rx="7" ry="4.5"/></g></g>
+          <g transform="translate(31 37)"><path id="dogTail" d="M0 4 q-10 -2 -14 -12 q-5 -4 -3 -10 q-2 -6 4 -8 q5 -2 7 3 q5 2 4 8 q3 6 8 10 Z"/></g>
+          <path d="M27 42 q-3 -8 4 -12 q2 -6 9 -5 q4 -5 10 -2 q5 -4 10 -1 q5 -4 10 0 q6 -3 10 1 q7 -1 9 5 q6 3 5 10 q3 6 -2 11 q-1 6 -8 6 q-4 4 -9 1 q-5 4 -10 0 q-5 4 -10 0 q-5 4 -10 0 q-6 3 -10 -2 q-7 -1 -7 -8 q-3 -2 -1 -4 Z"/>
+          <path d="M82 30 L94 20 L104 36 L94 48 Z"/>
+          <path d="M90 30 q-5 -6 -2 -13 q0 -8 8 -11 q5 -5 12 -2 q7 0 9 7 q6 1 8 6 q4 2 3 6 q1 5 -5 6 q-2 5 -8 4 q-3 5 -9 3 q-5 4 -10 0 q-5 -1 -6 -6 Z"/>
+          <path class="ear" d="M100 7 q-9 0 -11 10 q-3 8 0 15 q4 4 8 0 q4 -6 3 -13 q3 -6 0 -12 Z"/>
+          <circle class="eye" cx="110" cy="15" r="1.8"/>
+          <g transform="translate(40 52)"><g id="legHR"><rect x="-5" y="-2" width="10" height="28" rx="5"/><ellipse cx="1.5" cy="27" rx="7" ry="4.5"/></g></g>
+          <g transform="translate(78 52)"><g id="legFR"><rect x="-5" y="-2" width="10" height="28" rx="5"/><ellipse cx="1.5" cy="27" rx="7" ry="4.5"/></g></g>
+        </g>
+        <g id="dogPeek" transform="translate(0 120)">
+          <g id="peekHead">
+            <path d="M67.0 27.0 Q74.9 20.0 78.6 29.9 Q88.9 27.3 87.6 37.8 Q97.9 40.3 91.8 49.0 Q99.8 56.0 90.4 60.9 Q94.2 70.7 83.6 70.7 Q82.3 81.2 73.0 76.3 Q67.0 85.0 61.0 76.3 Q51.7 81.2 50.4 70.7 Q39.8 70.7 43.6 60.9 Q34.2 56.0 42.2 49.0 Q36.1 40.3 46.4 37.8 Q45.1 27.3 55.4 29.9 Q59.1 20.0 67.0 27.0 Z"/>
+            <path class="ear" d="M45 34 q-11 2 -14 15 q-3 13 1 24 q5 5 11 0 q5 -11 4 -24 Z"/>
+            <g transform="translate(134 0) scale(-1 1)"><path class="ear" d="M45 34 q-11 2 -14 15 q-3 13 1 24 q5 5 11 0 q5 -11 4 -24 Z"/></g>
+            <circle class="eye" cx="57.5" cy="49" r="2.6"/><circle class="eye" cx="76.5" cy="49" r="2.6"/>
+            <path class="eye" d="M62 58 Q67 55 72 58 Q71 63 67 64 Q63 63 62 58 Z"/>
+          </g>
+          <g id="peekPaws">
+            <ellipse cx="40" cy="86" rx="11" ry="8"/><ellipse cx="94" cy="86" rx="11" ry="8"/>
+            <path class="toe" d="M36 84 V91 M42 83 V91 M90 83 V91 M96 84 V91"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <p class="hint mono" aria-hidden="true"><span>Follow me</span>
+      <svg viewBox="0 0 12 12" width="12" height="12"><path d="M6 1 V10 M2 6 L6 10 L10 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </p>
   </section>
 
   <section class="chapter" id="structures" data-scene="structures" data-y0="2011" data-y1="2013">

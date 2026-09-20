@@ -77,6 +77,64 @@
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(request);
   window.addEventListener('load', request);
 
+  // The dog, first screen only: pops up, wags, dives off the bottom, and later peeks back
+  // over the edge before sinking down and looping — nudging the reader down the page.
+  // Wrapped so its own clock stays out of the count-up's t0 below, and so missing markup
+  // ends the block instead of throwing.
+  (function () {
+    var dog = document.getElementById('dog');
+    if (!dog) return;
+    var hero = document.querySelector('.hero');
+    var dogHop = document.getElementById('dogHop'), tail = document.getElementById('dogTail');
+    var peekHead = document.getElementById('peekHead'), peekPaws = document.getElementById('peekPaws');
+    document.getElementById('dogPeek').setAttribute('transform', '');
+    var legs = [['legFR', -48], ['legHL', 48], ['legFL', -48], ['legHR', 48]].map(function (l) {
+      return { el: document.getElementById(l[0]), air: l[1], a: 0 };
+    });
+    var POP = 480, WAIT = 2900, CROUCH = 3290, DIVE = 4060, PEEK = 7060, HOLD = 7660, SINK = 10260, DOWN = 10800, LOOP = 20800;
+    var t0 = -1, gone = false;
+    function ease(f) { f = clamp(f, 0, 1); return 1 - (1 - f) * (1 - f); }
+
+    function dogFrame(t) {
+      if (gone) return;
+      requestAnimationFrame(dogFrame);
+      if (t0 === -1) t0 = t - POP;                    // first visit: he is already standing there
+      else if (t0 === -2) t0 = t;                     // back at the top: he pops up from below again
+      var e = (t - t0) % LOOP, dx = 0, dy = 0, rot = 0, air = false, f;
+      var headY = 120, pawsY = 60, tilt = 0;
+
+      if (e < POP) { f = ease(e / POP); dy = (1 - f) * 200; air = f < 0.8; }
+      else if (e < WAIT) { }
+      else if (e < CROUCH) { f = (e - WAIT) / (CROUCH - WAIT); dy = f * 6; rot = f * 8; }
+      else if (e < DIVE) { f = (e - CROUCH) / (DIVE - CROUCH); dx = f * 50; dy = 6 - Math.sin(f * Math.PI) * 50 + f * f * 230; rot = 8 + f * 62; air = true; }
+      else {
+        dy = 400;
+        if (e >= PEEK && e < HOLD) { f = (e - PEEK) / (HOLD - PEEK); pawsY = 60 * (1 - ease(f / 0.45)); headY = 120 * (1 - ease((f - 0.25) / 0.75)); }
+        else if (e >= HOLD && e < SINK) { pawsY = 0; headY = 0; tilt = Math.sin((e - HOLD) / 520) * 7; }
+        else if (e >= SINK && e < DOWN) { f = (e - SINK) / (DOWN - SINK); headY = 120 * f * f; pawsY = 60 * clamp((f - 0.5) / 0.5, 0, 1); }
+      }
+
+      legs.forEach(function (l) {
+        l.a += ((air ? l.air : 0) - l.a) * 0.35;
+        l.el.setAttribute('transform', 'rotate(' + l.a.toFixed(1) + ')');
+      });
+      tail.setAttribute('transform', 'rotate(' + (Math.sin(t / 150) * 20).toFixed(1) + ')');
+      dogHop.setAttribute('transform', 'translate(' + dx.toFixed(1) + ',' + dy.toFixed(1) + ') rotate(' + rot.toFixed(1) + ' 67 48)');
+      peekHead.setAttribute('transform', 'translate(0,' + headY.toFixed(1) + ') rotate(' + tilt.toFixed(1) + ' 67 86)');
+      peekPaws.setAttribute('transform', 'translate(0,' + pawsY.toFixed(1) + ')');
+    }
+    if (!calm) requestAnimationFrame(dogFrame);
+
+    // Scrolling hides him; coming back to the very top brings him back, starting with the pop-up.
+    window.addEventListener('scroll', function () {
+      var away = window.scrollY >= 4;
+      if (away === gone) return;
+      gone = away;
+      hero.classList.toggle('scrolled', away);
+      if (!away && !calm) { t0 = -2; requestAnimationFrame(dogFrame); }
+    }, { passive: true });
+  })();
+
   // Count-up figures, once each
   if (!calm && 'IntersectionObserver' in window) {
     var figs = Array.from(document.querySelectorAll('.fig[data-to]'));
