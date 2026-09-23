@@ -1,0 +1,183 @@
+# en.yaml — every visible string on wandercodes.com, in page order.
+#
+# This is a READABLE MIRROR of site/index.html, not a build input. The site has
+# no build step and no data file; index.html stays the source of truth. Edit the
+# strings here, hand the file back, and the edits get applied to the markup.
+#
+# Keys are structural and stable (they follow the section ids already in the
+# markup), so an nb.yaml can sit beside this one later without re-keying.
+#
+# Fields ending in _href, and everything under `never_translate`, are not copy.
+
+meta:
+  # <head>. og_* and twitter_* are currently identical — keep them in sync.
+  title: "Ted Gonzalez, builder in Oslo"
+  description: "Server-side, DevOps, iOS engineer."
+  og_site_name: "Ted Gonzalez"
+  og_title: "Ted Gonzalez, builder in Oslo"
+  og_description: "Server-side, DevOps, iOS engineer."
+  # Describes the committed share card image. Changing this text does NOT redraw
+  # the card — that comes from tools/og-card.svg.
+  og_image_alt: "Card reading: I build apps, backends and the platform under them. Ted Gonzalez, Oslo."
+
+header:
+  brand: "Ted Gonzalez"
+  email_cta: "Email me"
+
+hero:
+  hello: "Hi, I'm Ted."
+  headline: "I build apps, backends and the platform under them."
+  sub: "Server-side, DevOps, iOS engineer."
+  scroll_hint: "Follow me"
+
+chapters:
+
+  structures:
+    counter: "1 of 6"
+    period: "2011–13, Philippines"      # en dash; the markup writes it as &ndash;
+    title: "Steel before software"
+    lede: >-
+      I started as a structural engineer at Chiyoda, working on oil and gas
+      plants. I kept writing code to speed up the calculations, until writing
+      the code became the job.
+    facts:
+      - figure: "20+"
+        label: "in-house tools built for structural design and reports"
+      - text: "Earthquake Resistant Award at IDEERS in Taiwan, as team leader. Our model survived every test."
+
+  switch:
+    counter: "2 of 6"
+    period: "2014, Manila"
+    title: "The switch to iOS"
+    lede: >-
+      At a disaster risk reduction hackathon backed by Google and the US
+      Department of State, I built an iOS app that lets an engineer assess a
+      building's structural integrity on site. Local governments in the
+      Philippines later got a version of their own.
+    facts:
+      - figure: "2nd"                    # ordinal — becomes "2." in nb
+        label: "place, TechCamp Hackathon 2014"
+      - text: "Then Insynchq, building Rolls: a photo app on top of Google Drive."
+    links:
+      - label: "Philstar article"
+        href: "https://www.philstar.com/business/technology/2014/05/26/1327156/hackathon-produces-digital-apps-disaster-resilience"
+      - label: "TV interview on ANC"
+        href: "https://youtu.be/PgXUd_urET8"
+
+  dubai:
+    counter: "3 of 6"
+    period: "2015–16, Dubai"
+    title: "Consulting"
+    lede: "I worked in two agencies with clients from banking, airline, cars and cleaning marketplace."
+    facts:
+      - text: "Emirates NBD, the number one banking app in the UAE"
+      - text: "Mercedes-Benz for Emirates Motor Company: service booking and tracking"
+      - text: "Matic, on-demand home cleaning in Dubai"
+      - text: "Employee apps for HRDF and Olayan Group in Saudi Arabia"
+    links:
+      - label: "Emirates NBD"
+        href: "https://www.emiratesnbd.com/en/ways-of-banking/mobile-banking-legacy"
+      - label: "Matic"
+        href: "https://maticservices.com/"
+
+  startups:
+    counter: "4 of 6"
+    period: "2016–18"
+    title: "RideAustin"
+    lede: >-
+      I worked on a rideshare company in Austin, Texas. I led the mobile team,
+      from iOS Software Architect to Mobile Chief Software Architect.
+      I also worked on BiznessApps, an app-building platform later acquired by BuildFire.
+    facts:
+      - figure: "1.7M"                   # locale-formatted — "1,7M" in nb
+        label: "rides in the first year"
+      - figure: "$200,000"               # locale-formatted — "$200 000" in nb
+        label: "raised for local charities"
+    links:
+      - label: "Open source on GitHub"
+        href: "https://github.com/RideAustin"
+      - label: "App Store"
+        href: "https://apps.apple.com/us/app/ride-austin-non-profit-tnc/id1116489847"
+      - label: "BuildFire on the acquisition"
+        href: "https://buildfire.com/buildfire-acquires-biznessapps/"
+
+  dnb:
+    counter: "5 of 6, part 1 of 4"
+    period: "2018–19, Oslo"
+    title: "DNB Mobilbank"
+    lede: >-
+      I joined the team that built the mobile bank for Norway's largest bank
+      from the ground up.
+      I'm also a huge contributor in bringing together all the iOS developers in the bank as one community.
+    facts:
+      - text: "Brought in Lokalise for localization. First in the mobile teams, now used everywhere in DNB."
+    links:
+      - label: "DNB Mobilbank"
+        href: "https://www.dnb.no/en/everyday-banking/mobile-bank"
+
+  dnb-aws:
+    counter: "5 of 6, part 2 of 4"
+    period: "2019–22, Oslo"
+    title: "From the data room to AWS"
+    lede: >-
+      I created applications in Go and Kotlin in order to move away from legacy systems.
+      I'm a lead contributor in bringing together server-side developers in multiple sections and share our best practices either via infrastructure, in code or in Slack.
+    facts:
+      - text: "Designed the Mac build servers used by every iOS team in DNB, then moved them from a physical data room to AWS"
+      - text: "Migrated the services behind accounts, cards, insurance and payments from on-prem to AWS"
+      - text: "Moved the Firebase and Dynatrace related services to AWS"
+    links:
+      - label: "Shifter on the AWS move"
+        href: "https://www.shifter.no/fintech/slik-kvittet-dnb-seg-med-fysiske-datarom-for-mobilbanken/261311"
+
+  dnb-cicd:
+    counter: "5 of 6, part 3 of 4"
+    period: "2019–25, Oslo"             # NB: the section's data-y0 is 2022, this says 2019 — see notes
+    title: "Jenkins to GitLab to GitHub"
+    lede: >-
+      Two CI/CD migrations across iOS and server-side, while leading product
+      teams as Tech Lead. The move to GitHub Actions cut costs, tightened
+      security and opened the door to AI tooling.
+    facts:
+      - text: "Moved iOS and server-side from Jenkins to GitLab pipelines"
+      - text: "Led the server-side move from GitLab to GitHub Actions"
+      - text: "Contributed migration tooling and docs to the GitHub team, which eased the move for other teams"
+      - text: "Pioneered Develocity for build caching and analytics on Android and server-side"
+
+  dnb-ai:
+    counter: "5 of 6, part 4 of 4"
+    period: "2025–now, Oslo"
+    title: "Faster with AI, for everyone"
+    lede: >-
+      As Staff Engineer I'm architecting DNB's new mortgage solution for mobile
+      and web, and bringing GitHub Copilot and Claude into daily work for
+      developers and non-developers alike.
+    facts:
+      - figure: "80+"
+        label: "developers across 6+ teams use the Claude code review setup I built"
+      - text: "Introduced Claude Code and agentic workflows to the team"
+      - text: "Set up CI/CD so colleagues who don't work in a terminal can use AI tools too"
+
+  now:
+    counter: "6 of 6"
+    period: "Now, Oslo"
+    year_marker: "Now"                   # data-label on the section; drives the header year
+    title: "Need a builder in Norway?"
+    lede: >-
+      I take a product from first commit to the App Store, and build the
+      backend, pipeline and cloud under it.
+    cta: "Email me"
+    links:
+      - label: "LinkedIn"
+        href: "https://linkedin.com/in/gonzalezted"
+      - label: "Stack Overflow, 20k+"    # the "20k+" is deliberately rounded so it ages well
+        href: "https://stackoverflow.com/users/3040446/ted"
+      - label: "Blog"
+        href: "https://medium.com/wandercodes"
+
+never_translate:
+  email: "gonzalez.theodore2@gmail.com"
+  # The tool chips in the closing chapter.
+  tools: [Swift, Kotlin, Go, Python, AWS CDK, Lambda, GitHub Actions, Fastlane, Claude Code]
+  # The only text drawn inside a scene SVG (the CI/CD chapter).
+  scene_labels: [Jenkins, GitLab, GitHub]
