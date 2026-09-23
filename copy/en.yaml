@@ -37,9 +37,10 @@ chapters:
     period: "2011–13, Philippines"      # en dash; the markup writes it as &ndash;
     title: "Steel before software"
     lede: >-
-      I started as a structural engineer at Chiyoda, working on oil and gas
-      plants. I kept writing code to speed up the calculations, until writing
-      the code became the job.
+      I finished a civil engineering degree in 4.5 years instead of five, then
+      joined Chiyoda as a structural engineer working on oil and gas plants. I
+      kept writing code to speed up the calculations, until writing the code
+      became the job.
     facts:
       - figure: "20+"
         label: "in-house tools built for structural design and reports"
@@ -108,7 +109,8 @@ chapters:
     lede: >-
       I joined the team that built the mobile bank for Norway's largest bank
       from the ground up.
-      I'm also a huge contributor in bringing together all the iOS developers in the bank as one community.
+      I also built much of what holds the bank's iOS developers together as one
+      community — the shared tooling and bots, the guides, the onboarding.
     facts:
       - text: "Brought in Lokalise for localization. First in the mobile teams, now used everywhere in DNB."
     links:
@@ -120,8 +122,11 @@ chapters:
     period: "2019–22, Oslo"
     title: "From the data room to AWS"
     lede: >-
-      I created applications in Go and Kotlin in order to move away from legacy systems.
-      I'm a lead contributor in bringing together server-side developers in multiple sections and share our best practices either via infrastructure, in code or in Slack.
+      I created applications in Go and Kotlin in order to move away from legacy systems,
+      and took the infrastructure with them, out of a physical data room and into AWS.
+      Across sections, a lot of the shared server-side practice runs through work
+      I do — the infrastructure teams build on, the patterns they follow, the
+      CI/CD they inherit, and the channel where it gets settled.
     facts:
       - text: "Designed the Mac build servers used by every iOS team in DNB, then moved them from a physical data room to AWS"
       - text: "Migrated the services behind accounts, cards, insurance and payments from on-prem to AWS"
@@ -132,7 +137,7 @@ chapters:
 
   dnb-cicd:
     counter: "5 of 6, part 3 of 4"
-    period: "2019–25, Oslo"             # NB: the section's data-y0 is 2022, this says 2019 — see notes
+    period: "2022–25, Oslo"             # matches the section's data-y0="2022" — the Tech Lead span
     title: "Jenkins to GitLab to GitHub"
     lede: >-
       Two CI/CD migrations across iOS and server-side, while leading product
@@ -170,7 +175,7 @@ chapters:
     links:
       - label: "LinkedIn"
         href: "https://linkedin.com/in/gonzalezted"
-      - label: "Stack Overflow, 20k+"    # the "20k+" is deliberately rounded so it ages well
+      - label: "Stack Overflow, 23k+"    # rounded down from the CV's 23.9k so it ages well
         href: "https://stackoverflow.com/users/3040446/ted"
       - label: "Blog"
         href: "https://medium.com/wandercodes"
