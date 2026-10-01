@@ -48,17 +48,15 @@ chapters:
 
   switch:
     counter: "2 of 6"
-    period: "2014, Manila"
+    period: "2013–14"                    # en dash; the markup writes it as &ndash;
     title: "The switch to iOS"
     lede: >-
-      At a disaster risk reduction hackathon backed by Google and the US
-      Department of State, I built an iOS app that lets an engineer assess a
-      building's structural integrity on site. Local governments in the
-      Philippines later got a version of their own.
+      I left structural engineering to join Insynchq, a startup, as an iOS
+      developer. There I built Rolls, a photo app on top of Google Drive.
     facts:
       - figure: "2nd"                    # ordinal — becomes "2." in nb
-        label: "place, TechCamp Hackathon 2014"
-      - text: "Then Insynchq, building Rolls: a photo app on top of Google Drive."
+        label: "place, TechCamp Hackathon 2014, on disaster risk reduction, backed by Google and the US Department of State"
+      - text: "An iOS app that lets an engineer check a building's structural integrity on site. Local governments in the Philippines later got a version of their own."
     links:
       - label: "Philstar article"
         href: "https://www.philstar.com/business/technology/2014/05/26/1327156/hackathon-produces-digital-apps-disaster-resilience"
